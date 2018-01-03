@@ -77,6 +77,11 @@ def lockHandler(evt) {
     	log.debug "event unlocked so schedule lock"
     	runIn(testMinutesMultiplier() * minutes, lockInMinutes)
     }
+    else
+    {
+    sendPush("Your door lock: ${thelock.label} appears to be jammed")
+    }
+    
     
 }
 
@@ -97,7 +102,6 @@ def lockCheckIfStillUnlocked()
 }
 def lockInMinutes()
 {
-	runIn(15, lockCheckIfStillUnlocked)
 	//thelock.each {lock->
     def lock = thelock
 	def lockState = lock.currentState("lock")
